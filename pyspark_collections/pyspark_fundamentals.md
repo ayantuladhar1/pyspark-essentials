@@ -59,110 +59,132 @@ df = spark.read.csv("data.csv", header=True)
 * DataSet
   * JVM-only(Scala/Java)
 
-7. Reading Data in PySpark
-  ○ CSV:
-  df = spark.read.option("header", True).csv("/path/file.csv")
-  ○ Parquet:
+# Reading Data in PySpark
+* CSV:
+```python
+df = spark.read.option("header", True).csv("/path/file.csv")
+```
+* Parquet:
+```python
   df = spark.read.parquet("/path/file.parquet")
-  ○ JSON:
+```
+* JSON:
+```python
   df = spark.read.json("/path/file.json")
-  ○ Hive Table:
+```
+* Hive Table:
+```python
   df = spark.sql("SELECT * FROM sales")
-
-8. Writing Data
+```
+# Writing Data
+```python
 df.write.mode("overwrite").parquet("/output/path")
-Write formats:
-  ○ CSV
-  ○ Parquet(Preferred)
-  ○ ORC
-  ○ Hive Tables
+```
+* Write formats:
+  * CSV
+  * Parquet(Preferred)
+  * ORC
+  * Hive Tables
 
-9. Common DataFrame Operations
-Select Columns:
+# Common DataFrame Operations
+* Select Columns:
+```python
 df.select("name", "salary")
-
-Filter Rows:
+```
+* Filter Rows:
+```python
 df.filter(df.salary > 50000)
-
-Add Column
+```
+* Add Column
+```python
 df.filter(df.salary > 50000)
-
-Drop Column
+```
+* Drop Column
+```python
 df.drop("bonus")
+```
+# Aggregate and GroupBy
+* Common Functions:
+  * Sum
+  * Avg
+  * Count
+  *  Min/Max
 
-10. Aggregate and GroupBy
-Common Functions:
-  ○ Sum
-  ○ Avg
-  ○ Count
-  ○ Min/Max
-
-11. Joins in PySpark
+# Joins in PySpark
+```python
 df1.join(df2, df1.id == df2.id, "inner")
-Join Types:
-  ○ Inner
-  ○ Left
-  ○ Right
-  ○ Full
+```
+* Join Types:
+  * Inner
+  * Left
+  * Right
+  * Full
 
-12. SparkSQL
-You can query DataFrames using SQL
+# SparkSQL
+* You can query DataFrames using SQL
+```python
 df.createOrReplaceTempView("employees")
 spark.sql("SELECT department, AVG(salary) FROM employees GROUP BY department")
+```
 
-13. Partitioning and Performance
-Repartition
+# Partitioning and Performance
+* Repartition
+```python
 df.repartition(4)
-Coalesce
+```
+* Coalesce
+```python
 df.coalesce(1)
+```
+* Why partitioning matters:
+  * Parallelism
+  * Performance
+  * Cost optimization
 
-Why partitioning matters:
-  ○ Parallelism
-  ○ Performance
-  ○ Cost optimization
-
-14. PySpark with Hive
+# PySpark with Hive
+```python
 spark = SparkSession.builder \
 .enableHiveSupport() \
 .getOrCreate()
+```
+* PySpark can:
+  * Read Hive tables
+  * Write partitioned Hive tables
+  * Replace many Hive ETL jobs
 
-PySpark can:
-  ○ Read Hive tables
-  ○ Write partitioned Hive tables
-  ○ Replace many Hive ETL jobs
+# PySpark in Real Data Engineering
+* Used for:
+  * ETL pipelines
+  * Data lake processing
+  * Batch transformations
+  * Feature engineering
+  * Big joins and aggregations
 
-15. PySpark in Real Data Engineering
-Used for:
-  ○ ETL pipelines
-  ○ Data lake processing
-  ○ Batch transformations
-  ○ Feature engineering
-  ○ Big joins and aggregations
+* Common stack:
+  * PySpark + HDFS/S3
+  * PySpark + Hive
+  * PySpark + Airflow
+  * PySpark + AWS Glue
 
-Common stack:
-  ○ PySpark + HDFS/S3
-  ○ PySpark + Hive
-  ○ PySpark + Airflow
-  ○ PySpark + AWS Glue
+# PySpark vs Pandas
 
-16. PySpark vs Pandas
+|Feature|	Pandas|	PySpark|
+|-------|-------|--------|
+|Data Size|	Small|	Huge|
+|Processing|	Single machine|	Distributed|
+|Speed|	Limited|	Very fast|
 
-Feature	Pandas	PySpark
-Data Size	Small	Huge
-Processing	Single machine	Distributed
-Speed	Limited	Very fast
+* Use Pandas for small data, PySpark for big data.
 
-Use Pandas for small data, PySpark for big data.
+# Best Practices
+* Use Parquet format
+* Avoid collect() on large data
+* Use DataFrames instead of RDDs
+* Partition wisely
+* Cache only when needed
 
-17. Best Practices
-  ○ Use Parquet format
-  ○ Avoid collect() on large data
-  ○ Use DataFrames instead of RDDs
-  ○ Partition wisely
-  ○ Cache only when needed
-
-18. Summary
-PySpark is a core skill for modern Data Engineers. It stirs on top of Hadoop and Hive but provides:
-  ○ Better performance
-  ○ Simpler APIs
-  ○ Industry relevance
+# Summary
+* PySpark is a core skill for modern Data Engineers. It stirs on top of Hadoop and Hive but provides:
+  * Better performance
+  * Simpler APIs
+  * Industry relevance
