@@ -152,7 +152,20 @@ spark = SparkSession.builder \
   * Write partitioned Hive tables
   * Replace many Hive ETL jobs
 
-# PySpark in Real Data Engineering
+# PySpark in Real Data Engineering+
+* Used for:  
+  * ETL pipelines
+  * Data lake processing
+  * Batch transformations
+  * Feature engineering
+  * Big joins and aggregations
+
+* Common stack:
+  * PySpark + HDFS/S3
+  * PySpark + Hive
+  * PySpark + Airflow
+  * PySpark + AWS Glue
+
 # PySpark vs Pandas
 
 |Feature|	Pandas|	PySpark|
