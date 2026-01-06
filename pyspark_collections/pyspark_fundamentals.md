@@ -2,8 +2,8 @@
 PySpark is the Python API for Apache Spark, a distributed data processing engine designed for big data analytics. It allows you to process massive datasets in parallel across clusters using Python.
 
 * In simple terms:
-*  Spark = Big data processing engine.
-*  PySpark = Spark + Python
+  * Spark = Big data processing engine.
+  * PySpark = Spark + Python
 
 PySpark is widely used in Data Engineering, Data Analytics, and Machine Learning pipelines.
 
