@@ -24,8 +24,8 @@ PySpark is the Python API for Apache Spark, a distributed data processing engine
 
 # PySpark vs Hadoop vs Hive
 
-|Feature| Hadoop| MapReduce|	Hive|	PySpark|
-|-------|-------|----------|-----|--------|
+|Feature| Hadoop MapReduce|	Hive|	PySpark|
+|-------|-----------------|-----|--------|
 |Speed	|Slow	|Medium	|Very Fast|
 |Language|	Java	|SQL	|Python / SQL|
 |Processing|	Disk-based	|SQL on Hadoop	|In-memory|
