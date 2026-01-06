@@ -41,22 +41,23 @@ spark = SparkSession.builder \
 .appName("PySpark Basics") \
 .getOrCreate()
 ```
-
-6. Data Abstractions in PySpark
-RDD (Resilient Distributed Dataset)
-  ○ Low-level
-  ○ Immutable
-  ○ Fault-tolerant
+# Data Abstractions in PySpark
+* RDD (Resilient Distributed Dataset)
+  * Low-level
+  * Immutable
+  * Fault-tolerant
+```python
 rdd = spark.sparkContext.parallelize([1, 2, 3, 4])
-
-DataFrame
-  ○ Structured data
-  ○ Optimized with Catalyst Optimizer
-  ○ SQL-like operations
+```
+* DataFrame
+  * Structured data
+  * Optimized with Catalyst Optimizer
+  * SQL-like operations
+```python
 df = spark.read.csv("data.csv", header=True)
-
-DataSet
-  ○ JVM-only(Scala/Java)
+```
+* DataSet
+  * JVM-only(Scala/Java)
 
 7. Reading Data in PySpark
   ○ CSV:
