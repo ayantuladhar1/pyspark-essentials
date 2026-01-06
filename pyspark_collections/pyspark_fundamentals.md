@@ -153,7 +153,7 @@ spark = SparkSession.builder \
   * Replace many Hive ETL jobs
 
 # PySpark in Real Data Engineering
-* Used for:
+* Used for:  
   * ETL pipelines
   * Data lake processing
   * Batch transformations
