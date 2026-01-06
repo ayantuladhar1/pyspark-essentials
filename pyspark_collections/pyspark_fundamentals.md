@@ -5,39 +5,42 @@ PySpark is the Python API for Apache Spark, a distributed data processing engine
   * Spark = Big data processing engine.
   * PySpark = Spark + Python
 
-PySpark is widely used in Data Engineering, Data Analytics, and Machine Learning pipelines.
+* PySpark is widely used in Data Engineering, Data Analytics, and Machine Learning pipelines.
 
-2. Why PySpark is Important?
-PySpark is important because it:
-  ○ Handles big data (TBs-PBs)
-  ○ Is much faster than MapReduce (in-memory processing)
-  ○ Supports batch + streaming
-  ○ Integrates with HDFS, Hive, S3, ADLS, Kafka
-  ○ Is heavily used in industry data pipelines
+# Why PySpark is Important?
+* PySpark is important because it:
+   * Handles big data (TBs-PBs)
+   * Is much faster than MapReduce (in-memory processing)
+   * Supports batch + streaming
+   * Integrates with HDFS, Hive, S3, ADLS, Kafka
+   * Is heavily used in industry data pipelines
 
-3. PySpark Architecture
-Driver Program (Python) -> Spark Session -> Executors(Workers) -> Distributed Data Processing
-Key Components:
-  ○ Driver - runs your PySpark code
-  ○ Executors - execute tasks on cluster nodes
-  ○ Cluster Manager - YARN/Kubernetes/Standalone
+# PySpark Architecture
+* Driver Program (Python) -> Spark Session -> Executors(Workers) -> Distributed Data Processing
+* Key Components:
+  * Driver - runs your PySpark code
+  * Executors - execute tasks on cluster nodes
+  * Cluster Manager - YARN/Kubernetes/Standalone
 
-4. PySpark vs Hadoop vs Hive
+# PySpark vs Hadoop vs Hive
 
-Feature	Hadoop MapReduce	Hive	PySpark
-Speed	Slow	Medium	Very Fast
-Language	Java	SQL	Python / SQL
-Processing	Disk-based	SQL on Hadoop	In-memory
-Use Case	Legacy batch	BI / Reporting	Modern DE pipelines
+|Feature| Hadoop| MapReduce|	Hive|	PySpark|
+|-------|-------|----------|-----|--------|
+|Speed	|Slow	|Medium	|Very Fast|
+|Language|	Java	|SQL	|Python / SQL|
+|Processing|	Disk-based	|SQL on Hadoop	|In-memory|
+|Use Case|	Legacy batch	|BI / Reporting	|Modern DE pipelines|
 
-Industry prefers PySpark, but it still uses Hadoop and Hive underneath.
+* Industry prefers PySpark, but it still uses Hadoop and Hive underneath.
 
-5. SparkSession(Entry Point)
-SparkSession is the starting point of PySpark
+# SparkSession(Entry Point)
+* SparkSession is the starting point of PySpark
+```pyspark
 from pyspark.sql import SparkSession
 spark = SparkSession.builder \
 .appName("PySpark Basics") \
 .getOrCreate()
+```
 
 6. Data Abstractions in PySpark
 RDD (Resilient Distributed Dataset)
