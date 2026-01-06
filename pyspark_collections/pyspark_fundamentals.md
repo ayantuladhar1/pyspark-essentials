@@ -35,7 +35,7 @@ PySpark is the Python API for Apache Spark, a distributed data processing engine
 
 # SparkSession(Entry Point)
 * SparkSession is the starting point of PySpark
-```pyspark
+```python
 from pyspark.sql import SparkSession
 spark = SparkSession.builder \
 .appName("PySpark Basics") \
