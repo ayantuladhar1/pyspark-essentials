@@ -153,14 +153,14 @@ spark = SparkSession.builder \
   * Replace many Hive ETL jobs
 
 # PySpark in Real Data Engineering
-* Used for
+* Used for:
   * ETL pipelines
   * Data lake processing
   * Batch transformations
   * Feature engineering
   * Big joins and aggregations
 
-* Common stack
+* Common stack:
   * PySpark + HDFS/S3
   * PySpark + Hive
   * PySpark + Airflow
