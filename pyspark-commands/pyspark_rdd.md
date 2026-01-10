@@ -6,17 +6,17 @@ RDD (Resilient Distributed Dataset) is the core, low-level data structure of Apa
 
 * Break the name down:  
   * **R – Resilient**
-  * Fault-tolerant
-  * If data is lost (node failure), Spark recomputes it automatically using lineage
+    * Fault-tolerant
+    * If data is lost (node failure), Spark recomputes it automatically using lineage
 
   * **D – Distributed**
-  * Data is split across multiple machines (nodes) in a cluster
-  * Each node processes its own chunk in parallel
+    * Data is split across multiple machines (nodes) in a cluster
+    * Each node processes its own chunk in parallel
 
   * **D – Dataset**
-  * A collection of elements (numbers, strings, objects, rows)
+    * A collection of elements (numbers, strings, objects, rows)
 
-* Key Characteristics of RDD:
+* Key Characteristics of RDD:  
 |Feature|	Explanation|
 |-------|--------------|
 |Immutable|	You can’t change an RDD; every transformation creates a new RDD|
