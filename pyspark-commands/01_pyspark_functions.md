@@ -1,12 +1,7 @@
-select()
- function is used to select single, multiple, column by index, all columns from the list and the nested columns from a DataFrame, PySpark select() is a transformation function hence it returns a new DataFrame with the selected columns.
-
-
-
+# select()
+This function is used to select single, multiple, column by index, all columns from the list and the nested columns from a DataFrame, PySpark select() is a transformation function hence it returns a new DataFrame with the selected columns.
+```python
 import pyspark
-
-
-
 data = [("James","Smith","USA","CA"),
     ("Michael","Rose","USA","NY"),
     ("Robert","Williams","USA","CA"),
@@ -15,51 +10,33 @@ data = [("James","Smith","USA","CA"),
 columns = ["firstname","lastname","country","state"]
 df = spark.createDataFrame(data = data, schema = columns)
 df.show(truncate=False)
+```
 
-
-
-
-
-Select Single & Multiple Columns From PySpark
-
-
+# Select Single & Multiple Columns From PySpark
+```python
 df.select("firstname","lastname").show()
-
 df.select(df.firstname,df.lastname).show()
-
 df.select(df["firstname"],df["lastname"]).show()
 
 #By using col() function
-
 from pyspark.sql.functions import col
-
 df.select(col("firstname"),col("lastname")).show()
-
 
 #Select All
 df.select("*").show()
+```
 
-
-
-
-
-Select Columns by Index
-
-
+# Select Columns by Index
+```python
 #Selects first 3 columns and top 3 rows
 df.select(df.columns[:3]).show(3)
 
 #Selects columns 2 to 4  and top 3 rows
 df.select(df.columns[2:4]).show(3)
+```
 
-
-
-
-
-
-Select Nested Struct Columns from PySpark
-
-
+# Select Nested Struct Columns from PySpark
+```python
 data = [
         (("James",None,"Smith"),"OH","M"),
         (("Anna","Rose",""),"NY","F"),
@@ -83,30 +60,17 @@ schema = StructType([
 df2 = spark.createDataFrame(data = data, schema = schema)
 df2.printSchema()
 df2.show(truncate=False) # shows all columns
-
-
-
-
-
-
-
+```
+```python
 df2.select("name").show(truncate=False)
-
-
-
-
-
-
+```
+```python
 df2.select("name.firstname","name.lastname").show(truncate=False)
+```
 
-
-
-
-withColumn()
-is a transformation function of DataFrame which is used to change the value, convert the datatype of an existing column, create a new column
-
-
-
+# withColumn()
+It is a transformation function of DataFrame which is used to change the value, convert the datatype of an existing column, create a new column
+```python
 data = [('James','','Smith','1991-04-01','M',3000),
   ('Michael','Rose','','2000-05-19','M',4000),
   ('Robert','','Williams','1978-09-05','M',4000),
@@ -115,18 +79,12 @@ data = [('James','','Smith','1991-04-01','M',3000),
 ]
 
 columns = ["firstname","middlename","lastname","dob","gender","salary"]
-
 df = spark.createDataFrame(data=data, schema = columns)
+```
 
-
-
-
-
-Change DataType using PySpark withColumn()
+# Change DataType using PySpark withColumn()
 By using PySpark withColumn() on a DataFrame, we can cast or change the data type of a column. In order to change data type, you would also need to use cast() function along with withColumn(). The below statement changes the datatype from Long to Double for the salary column.
-
-
-
+```python
 data = [('James','','Smith','1991-04-01','M',3000),
   ('Michael','Rose','','2000-05-19','M',4000),
   ('Robert','','Williams','1978-09-05','M',4000),
@@ -135,65 +93,41 @@ data = [('James','','Smith','1991-04-01','M',3000),
 ]
 
 columns = ["firstname","middlename","lastname","dob","gender","salary"]
-
 df = spark.createDataFrame(data=data, schema = columns)
-
-
-
-
-
-
-
+```
+```python
 ddf = df.withColumn("salary",col("salary").cast("Double"))
+```
 
-
-Update The Value of an Existing Column
-
+# Update The Value of an Existing Column
+```python
 udf = df.withColumn("salary",col("salary")*100)
+```
 
-
-Create a Column from an Existing
+# Create a Column from an Existing
 To add/create a new column, specify the first argument with a name you want your new column to be and use the second argument to assign a value by applying an operation on an existing column.
-
-
+```python
 ncol = df.withColumn("CopiedColumn",col("salary")* -1)
 ncol.show()
+```
 
-
-
-
-
-Add a New Column using withColumn() with constant value
+# Add a New Column using withColumn() with constant value
 In order to create a new column, pass the column name you wanted to the first argument of withColumn() transformation function. Make sure this new column is not already present on DataFrame, if it presents it updates the value of that column.
 In the below snippet, the PySpark lit() function is used to add a constant value to a DataFrame column. We can also chain in order to add multiple columns.
-
-
-
+```python
 from pyspark.sql.functions import col,lit
-
 df.withColumn("Country", lit("USA")).show()
+```
 
-
-
-
-
-Rename Column Name
-
-
+# Rename Column Name
+```python
 df.withColumnRenamed("gender","sex") \
   .show(truncate=False) 
+```
 
-
-
-
-
-
-filter()
-
-function is used to filter the rows from RDD/DataFrame based on the given condition or SQL expression, you can also use where() clause instead of the filter() if you are coming from an SQL background, both these functions operate exactly the same.
-
-
-
+# filter()
+This function is used to filter the rows from RDD/DataFrame based on the given condition or SQL expression, you can also use where() clause instead of the filter() if you are coming from an SQL background, both these functions operate exactly the same.
+```python
 from pyspark.sql.types import StructType,StructField 
 from pyspark.sql.types import StringType, IntegerType, ArrayType
 data = [
@@ -219,14 +153,11 @@ schema = StructType([
 df = spark.createDataFrame(data = data, schema = schema)
 df.printSchema()
 df.show(truncate=False)
+```
 
-
-
-
-
-DataFrame filter() with Column Condition
+# DataFrame filter() with Column Condition
 Use Column with the condition to filter the rows from DataFrame, using this you can express complex condition by referring column names using dfObject.colname
-
+```python
 df.filter(df.state == "OH").show(truncate=False)
 # not equals condition
 
@@ -235,88 +166,64 @@ df.filter(df.state != "OH") \
 
 df.filter(~(df.state == "OH")) \
     .show(truncate=False)
-
-
-
+```
 
 Same example can also written as below. In order to use this first you need to import from pyspark.sql.functions import col
-
-
-
-#Using SQL col() function
+```python
+# Using SQL col() function
 from pyspark.sql.functions import col
 
 df.filter(col("state") == "OH") \
     .show(truncate=False) 
+```
 
-
-
-
-
-DataFrame filter() with SQL Expression
+# DataFrame filter() with SQL Expression
 If you are coming from SQL background, you can use that knowledge in PySpark to filter DataFrame rows with SQL expressions.
-
-
-
-#Using SQL Expression
+```python
+# Using SQL Expression
 df.filter("gender == 'M'").show()
 
-#For not equal
+# For not equal
 df.filter("gender != 'M'").show()
 
 df.filter("gender <> 'M'").show()
+```
 
-
-
-
-
-PySpark Filter with Multiple Conditions
-
-
-//Filter multiple condition
+# PySpark Filter with Multiple Conditions
+```python
+# Filter multiple condition
 df.filter( (df.state  == "OH") & (df.gender  == "M") ) \
     .show(truncate=False)  
+```
 
-
-
-
-
-Filter Based on List Values
+# Filter Based on List Values
 If you have a list of elements and you wanted to filter that is not in the list or in the list, use isin() function of Column class and it doesn’t have isnotin() function but you do the same using not operator (~)
-
+```python
 li=["OH","CA","DE"]
 df.filter(df.state.isin(li)).show()
-
-
-
-
-
+```
+```python
 # Filter NOT IS IN List values
-#These show all records with NY (NY is not part of the list)
+# These show all records with NY (NY is not part of the list)
 df.filter(~df.state.isin(li)).show()
 df.filter(df.state.isin(li)==False).show()
-
-
-
-
-Filter Based on Starts With, Ends With, Contains
+```
+# Filter Based on Starts With, Ends With, Contains
 You can also filter DataFrame rows by using startswith(), endswith() and contains() methods of the Column class.
-
-
+```python
 # Using startswith
 df.filter(df.state.startswith("N")).show()
-#using endswith
+
+# Using endswith
 df.filter(df.state.endswith("H")).show()
 
-#contains
+# Contains
 df.filter(df.state.contains("H")).show()
+```
 
-
-
-
-Filter like and rlike
+# Filter like and rlike
 If you have SQL background you must be familiar with like and rlike (regex like), PySpark also provides similar methods in Column class to filter similar values using wildcard characters. You can use rlike() to filter by checking values case insensitive.
-
+```python
 data2 = [(2,"Michael Rose"),(3,"Robert Williams"),
      (4,"Rames Rose"),(5,"Rames rose")
   ]
@@ -324,35 +231,23 @@ df2 = spark.createDataFrame(data = data2, schema = ["id","name"])
 
 # like - SQL LIKE pattern
 df2.filter(df2.name.like("%rose%")).show()
+```
 
-
-
-
-Filter on an Array column
+# Filter on an Array column
 When you want to filter rows from DataFrame based on value present in an array collection column, you can use the first syntax. The below example uses array_contains() from Pyspark SQL functions which checks if a value contains in an array if present it returns true otherwise false.
-
-
-
-
-
+```python
 from pyspark.sql.functions import array_contains
 df.filter(array_contains(df.languages,"Java")) \
     .show(truncate=False)     
+```
 
-
-
-
-
-Filtering on Nested Struct columns
+# Filtering on Nested Struct columns
 If your DataFrame consists of nested struct columns, you can use any of the above syntaxes to filter the rows based on the nested column.
-
-
-
-  //Struct condition
+```python
+# Struct condition
 df.filter(df.name.lastname == "Williams") \
     .show(truncate=False) 
-
-
+```
 
 
 
