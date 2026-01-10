@@ -29,54 +29,29 @@ df = spark.read.csv("file:///home/takeo/zipcodes.csv")
 df.printSchema()
 ```
 
-root
- |-- _c0: string (nullable = true)
- |-- _c1: string (nullable = true)
- |-- _c2: string (nullable = true)
- |-- _c3: string (nullable = true)
- |-- _c4: string (nullable = true)
- |-- _c5: string (nullable = true)
- |-- _c6: string (nullable = true)
- |-- _c7: string (nullable = true)
- |-- _c8: string (nullable = true)
- |-- _c9: string (nullable = true)
- |-- _c10: string (nullable = true)
- |-- _c11: string (nullable = true)
- |-- _c12: string (nullable = true)
- |-- _c13: string (nullable = true)
- |-- _c14: string (nullable = true)
- |-- _c15: string (nullable = true)
- |-- _c16: string (nullable = true)
- |-- _c17: string (nullable = true)
- |-- _c18: string (nullable = true)
- |-- _c19: string (nullable = true)
-
-
+```python
 df.show()
+```
 
-
-Using Header Record For Column Names
-
+# Using Header Record For Column Names
+```python
 df2 = spark.read.option("header",True).csv("file:///home/takeo/zipcodes.csv")
-
-
+```
 
 As mentioned earlier, PySpark reads all columns as a string (StringType) by default.
 
-
-Options While Reading CSV File
+# Options While Reading CSV File
+```python
 df3 = spark.read.options(delimiter=',').csv("file:///home/takeo/zipcodes.csv")
+```
 
-
-
-InferSchema
+# InferSchema
 The default value set to this option is False when setting to true it automatically infers column types based on the data. Note that, it requires reading the data one more time to infer the schema.
-
+```python
 df4 = spark.read.options(inferSchema='True',delimiter=',') \
   .csv("file:///home/takeo/zipcodes.csv")
-
-
-Another way
+```
+## Another way
 
 df4 = spark.read.option("inferSchema",True) \
                 .option("delimiter",",") \
