@@ -1,16 +1,13 @@
-Create RDD using sparkContext.parallelize()
-
-
+# Create RDD using sparkContext.parallelize()
+```python
 from pyspark.sql import SparkSession
 spark:SparkSession = SparkSession.builder.master("local[1]").appName("bootcamp.com".getOrCreate()
-
-
-
-
+```
+```python
 data = [1,2,3,4,5,6,7,8,9,10,11,12]
 rdd=spark.sparkContext.parallelize(data)
 rdd.count()
-
+```
 
 Create RDD using sparkContext.textFile()
 
