@@ -23,14 +23,11 @@ RecordNumber,Zipcode,ZipCodeType,City,State,LocationType,Lat,Long,Xaxis,Yaxis,Za
 76512,27203,STANDARD,ASHEBORO,NC,PRIMARY,35.71,-79.81,0.14,-0.79,0.58,NA,Ucat S,"Asheboro, NC",NA-US-NC-ASHEBORO,FALSE,8355,15228,215474318,
 76513,27204,PO BOX,ASHEBORO,NC,PRIMARY,35.71,-79.81,0.14,-0.79,0.58,NA,US,"Asheboro, NC",NA-US-NC-ASHEBORO,FALSE,1035,1816,30322473,
 ```
-
-
-
-
-
+# Read the csv file uisng Pyspark
+```python
 df = spark.read.csv("file:///home/takeo/zipcodes.csv")
 df.printSchema()
-
+```
 
 root
  |-- _c0: string (nullable = true)
