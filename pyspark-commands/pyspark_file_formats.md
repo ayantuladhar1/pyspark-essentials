@@ -28,6 +28,7 @@ RecordNumber,Zipcode,ZipCodeType,City,State,LocationType,Lat,Long,Xaxis,Yaxis,Za
 df = spark.read.csv("file:///home/takeo/zipcodes.csv")
 df.printSchema()
 ```
+<img width="316" height="495" alt="image" src="https://github.com/user-attachments/assets/95b3cb71-10a3-4ec6-9d81-3de605db4d0e" />
 
 ```python
 df.show()
@@ -57,14 +58,16 @@ df4 = spark.read.option("inferSchema",True) \
                 .option("delimiter",",") \
   .csv("file:///home/takeo/zipcodes.csv")
 ```
+<img width="288" height="471" alt="image" src="https://github.com/user-attachments/assets/5b2771de-90e8-4619-bcc8-2655130b2907" />
 
-# header
+# Header
 This option is used to read the first line of the CSV file as column names. By default the value of this option is False , and all column types are assumed to be a string.
 ```python
 df3 = spark.read.options(header='True', inferSchema='True', delimiter=',') \
   .csv("file:///home/takeo/zipcodes.csv")
 df3.printSchema()
 ```
+<img width="424" height="464" alt="image" src="https://github.com/user-attachments/assets/aa230e1d-e0eb-4e66-9259-f5a4267e5145" />
 
 # Reading CSV files with a user-specified custom schema
 If you know the schema of the file ahead and do not want to use the inferSchema option for column names and types
