@@ -2,28 +2,28 @@
 RDD (Resilient Distributed Dataset) is the core, low-level data structure of Apache Spark.
 
 * In simple terms:  
-RDD = an immutable, distributed collection of data that Spark can process in parallel  
+  * RDD = an immutable, distributed collection of data that Spark can process in parallel  
 
-Break the name down:  
-**R – Resilient**
-Fault-tolerant
-If data is lost (node failure), Spark recomputes it automatically using lineage
+* Break the name down:  
+  * **R – Resilient**
+  * Fault-tolerant
+  * If data is lost (node failure), Spark recomputes it automatically using lineage
 
-D – Distributed
-Data is split across multiple machines (nodes) in a cluster
-Each node processes its own chunk in parallel
+  * **D – Distributed**
+  * Data is split across multiple machines (nodes) in a cluster
+  * Each node processes its own chunk in parallel
 
-D – Dataset
+  * **D – Dataset**
+  * A collection of elements (numbers, strings, objects, rows)
 
-A collection of elements (numbers, strings, objects, rows)
-
-🏗️ Key Characteristics of RDD
-Feature	Explanation
-Immutable	You can’t change an RDD; every transformation creates a new RDD
-Distributed	Stored across cluster nodes
-Fault-tolerant	Uses lineage (DAG) to recover data
-Lazy evaluation	Nothing runs until an action is called
-Parallel processing	Fast processing on large datasets
+* Key Characteristics of RDD:
+|Feature|	Explanation|
+|-------|--------------|
+|Immutable|	You can’t change an RDD; every transformation creates a new RDD|
+|Distributed|	Stored across cluster nodes|
+|Fault-tolerant|	Uses lineage (DAG) to recover data|
+|Lazy evaluation|	Nothing runs until an action is called|
+|Parallel processing|	Fast processing on large datasets|
 
 # To Create RDD using sparkContext.parallelize()
 * From existing data (HDFS, local, S3, etc.)
