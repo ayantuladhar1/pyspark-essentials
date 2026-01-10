@@ -1,6 +1,5 @@
-Create zipcodes.csv in your home dir. Ignore if already created
-
-
+# Create zipcodes.csv in your home dir in HDFS.
+```csv
 RecordNumber,Zipcode,ZipCodeType,City,State,LocationType,Lat,Long,Xaxis,Yaxis,Zaxis,WorldRegion,Country,LocationText,Location,Decommisioned,TaxReturnsFiled,EstimatedPopulation,TotalWages,Notes
 1,704,STANDARD,PARC PARQUE,PR,NOT ACCEPTABLE,17.96,-66.22,0.38,-0.87,0.3,NA,US,"Parc Parque, PR",NA-US-PR-PARC PARQUE,FALSE,,,,
 2,704,STANDARD,PASEO COSTA DEL SUR,PR,NOT ACCEPTABLE,17.96,-66.22,0.38,-0.87,0.3,NA,US,"Paseo Costa Del Sur, PR",NA-US-PR-PASEO COSTA DEL SUR,FALSE,,,,
@@ -23,7 +22,7 @@ RecordNumber,Zipcode,ZipCodeType,City,State,LocationType,Lat,Long,Xaxis,Yaxis,Za
 76511,27007,STANDARD,ASH HILL,NC,NOT ACCEPTABLE,36.4,-80.56,0.13,-0.79,0.59,NA,US,"Ash Hill, NC",NA-US-NC-ASH HILL,FALSE,842,1666,28876493,
 76512,27203,STANDARD,ASHEBORO,NC,PRIMARY,35.71,-79.81,0.14,-0.79,0.58,NA,Ucat S,"Asheboro, NC",NA-US-NC-ASHEBORO,FALSE,8355,15228,215474318,
 76513,27204,PO BOX,ASHEBORO,NC,PRIMARY,35.71,-79.81,0.14,-0.79,0.58,NA,US,"Asheboro, NC",NA-US-NC-ASHEBORO,FALSE,1035,1816,30322473,
-
+```
 
 
 
