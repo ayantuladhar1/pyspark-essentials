@@ -12,16 +12,19 @@ rdd = spark.sparkContext.parallelize(data)
 dfFromRDD1 = rdd.toDF()
 dfFromRDD1.printSchema()
 ```
+<img width="272" height="103" alt="image" src="https://github.com/user-attachments/assets/4f8f9659-3a0b-4af8-8936-6211fffbbf34" />
 
 If you want to provide column names to the DataFrame use the toDF() method with column names as arguments as shown below.
 ```python
 dfFromRDD1 = rdd.toDF(columns)
 dfFromRDD1.printSchema()
 ```
+<img width="314" height="109" alt="image" src="https://github.com/user-attachments/assets/e7c47c0e-4b5f-4abb-b552-0c8b881e3b89" />
 
 ```python
 dfFromRDD1.show() —> Action
 ```
+<img width="231" height="193" alt="image" src="https://github.com/user-attachments/assets/33bd793c-0e59-4915-8174-387e5477dfbc" />
 
 # PySpark StructType & StructField Explained with Examples
 ```python
@@ -48,7 +51,7 @@ df = spark.createDataFrame(data=data,schema=schema)
 df.printSchema()
 df.show()
 ```
-
+<img width="485" height="427" alt="image" src="https://github.com/user-attachments/assets/fcc9ba52-274d-4d3c-bbbb-6f43701fb8ed" />
 
 # Defining Nested StructType object struct
 While working on DataFrame we often need to work with the nested struct column and this can be defined using StructType.
@@ -76,6 +79,7 @@ df2 = spark.createDataFrame(data=structureData,schema=structureSchema)
 df2.printSchema()
 df2.show(truncate=False)
 ```
+<img width="370" height="449" alt="image" src="https://github.com/user-attachments/assets/c2b24e45-0435-4ca3-8b44-05a9645fcac9" />
 
 # Using createDataFrame()
 Using createDataFrame() from SparkSession is another way to create manually and it takes rdd object as an argument. and chain with toDF() to specify names to the columns.
