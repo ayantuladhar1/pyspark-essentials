@@ -24,11 +24,10 @@ print("initial partition count:"+str(rdd10.getNumPartitions()))
 # Repartition and Coalesce
 Sometimes we may need to repartition the RDD, PySpark provides two ways to repartition; first using repartition() method which shuffles data from all nodes also called full shuffle and second coalesce() method which shuffle data from minimum nodes, for examples if you have data in 4 partitions and doing coalesce(2) moves data from just 2 nodes.  
 Both of the functions take the number of partitions to repartition rdd as shown below.  Note that the repartition() method is a very expensive operation as it shuffles data from all nodes in a cluster. 
-
-
+```sql
 reparRdd = rdd10.repartition(4)
 print("re-partition count:"+str(reparRdd.getNumPartitions()))
-
+```
 
 
 PySpark RDD Operations
