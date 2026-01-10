@@ -1,7 +1,7 @@
-# Create RDD using sparkContext.parallelize()
+# To Create RDD using sparkContext.parallelize()
 ```python
 from pyspark.sql import SparkSession
-spark:SparkSession = SparkSession.builder.master("local[1]").appName("bootcamp.com".getOrCreate()
+spark:SparkSession = SparkSession.builder.master("local[1]").appName("bootcamp.com".getOrCreate())
 ```
 ```python
 data = [1,2,3,4,5,6,7,8,9,10,11,12]
@@ -9,23 +9,19 @@ rdd=spark.sparkContext.parallelize(data)
 rdd.count()
 ```
 
-Create RDD using sparkContext.textFile()
-
-
+# To Create RDD using sparkContext.textFile()
+```python
 rdd2 = spark.sparkContext.textFile("file:///home/takeo/customer.txt")
 rdd2.count()
+```
 
-
-
-
-Creating empty RDD with partition
-
-
+# Creating empty RDD with partition
+```python
 rdd10=spark.sparkContext.parallelize(data, 10)
 print("initial partition count:"+str(rdd10.getNumPartitions()))
+```
 
-
-Repartition and Coalesce
+# Repartition and Coalesce
 Sometimes we may need to repartition the RDD, PySpark provides two ways to repartition; first using repartition() method which shuffles data from all nodes also called full shuffle and second coalesce() method which shuffle data from minimum nodes, for examples if you have data in 4 partitions and doing coalesce(2) moves data from just 2 nodes.  
 Both of the functions take the number of partitions to repartition rdd as shown below.  Note that the repartition() method is a very expensive operation as it shuffles data from all nodes in a cluster. 
 
