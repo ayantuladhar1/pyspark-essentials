@@ -16,7 +16,8 @@ RDD (Resilient Distributed Dataset) is the core, low-level data structure of Apa
   * **D – Dataset**
     * A collection of elements (numbers, strings, objects, rows)
 
-* Key Characteristics of RDD:  
+* Key Characteristics of RDD:
+
 |Feature|	Explanation|
 |-------|--------------|
 |Immutable|	You can’t change an RDD; every transformation creates a new RDD|
