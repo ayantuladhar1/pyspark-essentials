@@ -1,4 +1,4 @@
-# Create zipcodes.csv in your home dir in HDFS.
+# Create zipcodes.csv in your home dir.
 ```csv
 RecordNumber,Zipcode,ZipCodeType,City,State,LocationType,Lat,Long,Xaxis,Yaxis,Zaxis,WorldRegion,Country,LocationText,Location,Decommisioned,TaxReturnsFiled,EstimatedPopulation,TotalWages,Notes
 1,704,STANDARD,PARC PARQUE,PR,NOT ACCEPTABLE,17.96,-66.22,0.38,-0.87,0.3,NA,US,"Parc Parque, PR",NA-US-PR-PARC PARQUE,FALSE,,,,
@@ -52,80 +52,25 @@ df4 = spark.read.options(inferSchema='True',delimiter=',') \
   .csv("file:///home/takeo/zipcodes.csv")
 ```
 ## Another way
-
+```python
 df4 = spark.read.option("inferSchema",True) \
                 .option("delimiter",",") \
   .csv("file:///home/takeo/zipcodes.csv")
+```
 
-
-
-
-
-
-|-- _c0: string (nullable = true)
- |-- _c1: string (nullable = true)
- |-- _c2: string (nullable = true)
- |-- _c3: string (nullable = true)
- |-- _c4: string (nullable = true)
- |-- _c5: string (nullable = true)
- |-- _c6: string (nullable = true)
- |-- _c7: string (nullable = true)
- |-- _c8: string (nullable = true)
- |-- _c9: string (nullable = true)
- |-- _c10: string (nullable = true)
- |-- _c11: string (nullable = true)
- |-- _c12: string (nullable = true)
- |-- _c13: string (nullable = true)
- |-- _c14: string (nullable = true)
- |-- _c15: string (nullable = true)
- |-- _c16: string (nullable = true)
- |-- _c17: string (nullable = true)
- |-- _c18: string (nullable = true)
- |-- _c19: string (nullable = true)
-
-
-header
+# header
 This option is used to read the first line of the CSV file as column names. By default the value of this option is False , and all column types are assumed to be a string.
-
-
+```python
 df3 = spark.read.options(header='True', inferSchema='True', delimiter=',') \
   .csv("file:///home/takeo/zipcodes.csv")
-
 df3.printSchema()
+```
 
-
-|-- RecordNumber: integer (nullable = true)
- |-- Zipcode: integer (nullable = true)
- |-- ZipCodeType: string (nullable = true)
- |-- City: string (nullable = true)
- |-- State: string (nullable = true)
- |-- LocationType: string (nullable = true)
- |-- Lat: double (nullable = true)
- |-- Long: double (nullable = true)
- |-- Xaxis: double (nullable = true)
- |-- Yaxis: double (nullable = true)
- |-- Zaxis: double (nullable = true)
- |-- WorldRegion: string (nullable = true)
- |-- Country: string (nullable = true)
- |-- LocationText: string (nullable = true)
- |-- Location: string (nullable = true)
- |-- Decommisioned: boolean (nullable = true)
- |-- TaxReturnsFiled: integer (nullable = true)
- |-- EstimatedPopulation: integer (nullable = true)
- |-- TotalWages: integer (nullable = true)
- |-- Notes: string (nullable = true)
-
-
-Reading CSV files with a user-specified custom schema
+# Reading CSV files with a user-specified custom schema
 If you know the schema of the file ahead and do not want to use the inferSchema option for column names and types
-
-
-
-
+```python
 import pyspark
-
 from pyspark.sql.types import *
-
 schema = StructType() \
       .add("RecordNumber",IntegerType(),True) \
       .add("Zipcode",IntegerType(),True) \
@@ -152,108 +97,64 @@ df_with_schema = spark.read.format("csv") \
       .option("header", True) \
       .schema(schema) \
       .load("file:///home/takeo/zipcodes.csv")
+````
 
-
-
-
-
-Saving modes
+# Saving modes
 PySpark DataFrameWriter also has a method mode() to specify saving mode.
 overwrite – mode is used to overwrite the existing file.
-
-
+```python
 df_with_schema.write.mode('overwrite').csv("file:///tmp/spark_output/zipcodes")
-
-//you can also use this
-
+# you can also use this
 df_with_schema.write.format("csv").mode('overwrite').save("file:///tmp/spark_output/zipcodes")
-
-
-
-
-
-
-*************************************** Parquet ****************************************
-
-
-
-Pyspark Write DataFrame to Parquet file format
-
+```
+# Parquet
+## Pyspark Write DataFrame to Parquet file format
+```python
 data =[("James ","","Smith","36636","M",3000),
               ("Michael ","Rose","","40288","M",4000),
               ("Robert ","","Williams","42114","M",4000),
               ("Maria ","Anne","Jones","39192","F",4000),
               ("Jen","Mary","Brown","","F",-1)]
 columns=["firstname","middlename","lastname","dob","gender","salary"]
-
 df=spark.createDataFrame(data,columns)
 df.write.parquet("file:///tmp/output/people.parquet")
+```
 
-
-
-
-Read Parquet file into DataFrame
-
-
+## Read Parquet file into DataFrame
+```python
 parDF=spark.read.parquet("file:///tmp/output/people.parquet")
+```
 
-
-
-
-SQL queries DataFrame
-
+## SQL queries DataFrame
+```python
 parDF.createOrReplaceTempView("ParquetTable")
 parkSQL = spark.sql("select * from ParquetTable where salary >= 4000 ")
 parkSQL.show()
+```
 
 
-
-*************************************** ORC ****************************************
-
-
-
+# ORC
+```python
 parDF.write.orc("file:///tmp/orc/data.orc")
-
-
-
-
-
-
-  
+```
+```python
 df = spark.read.orc("file:///tmp/orc/data.orc")
 df.printSchema()
 df.show()
+```
 
-
-
-
-
-
-Run sql on Orc File
-
-
-
+## Run sql on Orc File
+```python
 df.createOrReplaceTempView("ORCTable")
 orcSQL = spark.sql("select firstname,dob from ORCTable where salary >= 4000 ")
 orcSQL.show()
+```
 
-
-
-
-
-
-*******************************Json****************************************
-
-
-
+# JSON
+```python
 # Read JSON file into dataframe
 parDF.write.json("file:///tmp/json/data.json")
-
 df = spark.read.json("file:///tmp/json/data.json")
 df.printSchema()
 df.show()
-
-
-
-
-
+```
