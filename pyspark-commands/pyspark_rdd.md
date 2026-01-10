@@ -146,7 +146,8 @@ data = rdd6.collect()
 for f in data:
     print("Key:"+ str(f[0]) +", Value:"+f[1])
 ```
-# saveAsTextFile() – Using saveAsTestFile action, we can write the RDD to a text file.
+# saveAsTextFile()
+Using saveAsTestFile action, we can write the RDD to a text file.
 ```python
 rdd6.saveAsTextFile("file:///home/takeo/wordCount")
 ```
