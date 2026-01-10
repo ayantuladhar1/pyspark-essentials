@@ -67,114 +67,86 @@ print("re-partition count:"+str(reparRdd.getNumPartitions()))
 rdd = spark.sparkContext.textFile("file:///home/takeo/test.txt")
 ```
 
-# flatMap – flatMap() transformation flattens the RDD after applying the function and returns a new RDD. In the below example, first, it splits each record by space in an RDD and finally flattens it. Resulting RDD consists of a single word on each record.
+# flatMap
+flatMap() transformation flattens the RDD after applying the function and returns a new RDD. In the below example, first, it splits each record by space in an RDD and finally flattens it. Resulting RDD consists of a single word on each record.
 ```pyhton
 rdd2 = rdd.flatMap(lambda x: x.split(" "))
 ```
 
-# map – map() transformation is used to apply any complex operations like adding a column, updating a column e.t.c, the output of map transformations would always have the same number of records as input.
+# map
+map() transformation is used to apply any complex operations like adding a column, updating a column e.t.c, the output of map transformations would always have the same number of records as input.
 ```python
 rdd3 = rdd2.map(lambda x: (x,1))
 ```
 
-# reduceByKey – reduceByKey() merges the values for each key with the function specified. In our example, it reduces the word string by applying the sum function on value. The result of our RDD contains unique words and their count.
+# reduceByKey
+reduceByKey() merges the values for each key with the function specified. In our example, it reduces the word string by applying the sum function on value. The result of our RDD contains unique words and their count.
 ```python
 rdd5 = rdd3.reduceByKey(lambda a,b: a+b)
 print(rdd5.collect())
 ```
 
-# sortByKey – sortByKey() transformation is used to sort RDD elements on key. In our example, first, we convert RDD[(String,Int]) to RDD[(Int, String]) using map transformation and apply sortByKey which ideally does sort on an integer value. And finally, foreach with println statements returns all words in RDD and their count as key-value pair
+# sortByKey
+sortByKey() transformation is used to sort RDD elements on key. In our example, first, we convert RDD[(String,Int]) to RDD[(Int, String]) using map transformation and apply sortByKey which ideally does sort on an integer value. And finally, foreach with println statements returns all words in RDD and their count as key-value pair
 ```python
 rdd6 = rdd5.map(lambda x: (x[1],x[0])).sortByKey()
 print(rdd6.collect())
 ```
 
-# filter – filter() transformation is used to filter the records in an RDD. In our example we are filtering all words contains “an”.
+# filter
+filter() transformation is used to filter the records in an RDD. In our example we are filtering all words contains “an”.
 ```python
 rdd4 = rdd3.filter(lambda x : 'an' in x[0])
 print(rdd4.collect())
 ```
 
 # RDD Actions with example
-
-RDD Action operations return the values from an RDD to a driver program. In other words, any RDD function that returns non-RDD is considered as an action
-
-count() – Returns the number of records in an RDD
-first() – Returns the first record.
-
-
+RDD Action operations return the values from an RDD to a driver program. In other words, any RDD function that returns non-RDD is considered as an action:
+* count() – Returns the number of records in an RDD
+* first() – Returns the first record.
+```python
 print("Count : "+str(rdd6.count()))
-
-
-
-
-
-
+```
+```python
 # Action - first
 firstRec = rdd6.first()
 print("First Record : "+str(firstRec[0]) + ","+ firstRec[1])
+```
 
-
-
-
-
-max() – Returns max record.
-
-
+# max()
+Returns max record.
+```python
 # Action - max
 datMax = rdd6.max()
 print("Max Record : "+str(datMax[0]) + ","+ datMax[1])
+```
 
-
-
-
-
-reduce() – Reduces the records to single, we can use this to count or sum.
-
-
-
-
+# reduce()
+Reduces the records to single, we can use this to count or sum.
+```python
 # Action - reduce
 totalWordCount = rdd6.reduce(lambda a,b: (a[0]+b[0],a[1]))
 print("dataReduce Record : "+str(totalWordCount[0]))
+```
 
-
-
-
-
-take() – Returns the record specified as an argument.
-
-
+# take()
+Returns the record specified as an argument.
+```python
 # Action - take
 data3 = rdd6.take(3)
 for f in data3:
     print("data3 Key:"+ str(f[0]) +", Value:"+f[1])
+```
 
-
-
-
-
-collect() – Returns all data from RDD as an array. Be careful when you use this action when you are working with huge RDD with millions and billions of data as you may run out of memory on the driver.
-
-
-
+# collect()
+Returns all data from RDD as an array. Be careful when you use this action when you are working with huge RDD with millions and billions of data as you may run out of memory on the driver.
+```python
 # Action - collect
 data = rdd6.collect()
 for f in data:
     print("Key:"+ str(f[0]) +", Value:"+f[1])
-
-
-
-
-
-saveAsTextFile() – Using saveAsTestFile action, we can write the RDD to a text file.
-
-
-
+```
+# saveAsTextFile() – Using saveAsTestFile action, we can write the RDD to a text file.
+```python
 rdd6.saveAsTextFile("file:///home/takeo/wordCount")
-
-
-
-
-
-
+```
