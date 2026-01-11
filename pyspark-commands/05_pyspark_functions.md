@@ -34,10 +34,8 @@ df.withColumn("row_number",row_number().over(windowSpec)) \
     .show(truncate=False)
 ```
 
-+-------------+----------+------+----------+
 |employee_name|department|salary|row_number|
 |-------------|----------|------|----------|
-+-------------+----------+------+----------+
 |Maria        |Finance   |3000  |1         |
 |Scott        |Finance   |3300  |2         |
 |Jen          |Finance   |3900  |3         |
@@ -48,7 +46,6 @@ df.withColumn("row_number",row_number().over(windowSpec)) \
 |Robert       |Sales     |4100  |3         |
 |Saif         |Sales     |4100  |4         |
 |Michael      |Sales     |4600  |5         |
-+-------------+----------+------+----------+
 
 ## rank() 
 Window function is used to provide a rank to the result within a window partition. This function leaves gaps in rank when there are ties.
@@ -60,9 +57,8 @@ df.withColumn("rank",rank().over(windowSpec)) \
 select *, rank() over(partition by dept order by sal) as rank
 ```
 
-+-------------+----------+------+----+
 |employee_name|department|salary|rank|
-+-------------+----------+------+----+
+|-------------|----------|------|----|
 |        Maria|   Finance|  3000|   1|
 |        Scott|   Finance|  3300|   2|
 |          Jen|   Finance|  3900|   3|
@@ -73,7 +69,6 @@ select *, rank() over(partition by dept order by sal) as rank
 |       Robert|     Sales|  4100|   3|
 |         Saif|     Sales|  4100|   3|
 |      Michael|     Sales|  4600|   5|
-+-------------+----------+------+----+
 
 ## dense_rank() 
 Window function is used to get the result with rank of rows within a window partition without any gaps. This is similar to rank() function difference being rank function leaves gaps in rank when there are ties.
@@ -84,9 +79,8 @@ df.withColumn("dense_rank",dense_rank().over(windowSpec)) \
     .show()
 ```
 
-+-------------+----------+------+----------+
 |employee_name|department|salary|dense_rank|
-+-------------+----------+------+----------+
+|-------------|----------|------|----------|
 |        Maria|   Finance|  3000|         1|
 |        Scott|   Finance|  3300|         2|
 |          Jen|   Finance|  3900|         3|
@@ -97,7 +91,6 @@ df.withColumn("dense_rank",dense_rank().over(windowSpec)) \
 |       Robert|     Sales|  4100|         2|
 |         Saif|     Sales|  4100|         2|
 |      Michael|     Sales|  4600|         3|
-+-------------+----------+------+----------+
 
 ## lag Window Function
 ```python
@@ -107,9 +100,8 @@ df.withColumn("lag",lag("salary",2).over(windowSpec)) \
       .show()
 ```
 
-+-------------+----------+------+----+
 |employee_name|department|salary| lag|
-+-------------+----------+------+----+
+|-------------|----------|------|----|
 |        Maria|   Finance|  3000|null|
 |        Scott|   Finance|  3300|null|
 |          Jen|   Finance|  3900|3000|
@@ -120,7 +112,6 @@ df.withColumn("lag",lag("salary",2).over(windowSpec)) \
 |       Robert|     Sales|  4100|3000|
 |         Saif|     Sales|  4100|3000|
 |      Michael|     Sales|  4600|4100|
-+-------------+----------+------+----+
 
 ## lead Window Function
 ```python
@@ -130,9 +121,8 @@ df.withColumn("lead",lead("salary",1).over(windowSpec)) \
     .show()
 ```
 
-+-------------+----------+------+----+
 |employee_name|department|salary|lead|
-+-------------+----------+------+----+
+|-------------|----------|------|----|
 |        Maria|   Finance|  3000|3300|
 |        Scott|   Finance|  3300|3900|
 |          Jen|   Finance|  3900|null|
@@ -143,7 +133,6 @@ df.withColumn("lead",lead("salary",1).over(windowSpec)) \
 |       Robert|     Sales|  4100|4100|
 |         Saif|     Sales|  4100|4600|
 |      Michael|     Sales|  4600|null|
-+-------------+----------+------+----+
 
 PySpark Date and Timestamp Functions are supported on DataFrame and SQL queries and they work similarly to traditional SQL, Date and Time are very important if you are using PySpark for ETL. Most of all these functions accept input as, Date type, Timestamp type, or String. If a String used, it should be in a default format that can be cast to date.
 DateType default format is yyyy-MM-dd 
@@ -159,13 +148,11 @@ df=spark.createDataFrame(data,["id","input"])
 df.show()
 ```
 
-+---+----------+
 | id|     input|
-+---+----------+
+|---|----------|
 |  1|2020-02-01|
 |  2|2019-03-01|
 |  3|2021-03-01|
-+---+----------+
 
 ## current_date()
 ```python
@@ -174,11 +161,9 @@ df.select(current_date().alias("current_date")
   ).show(1)
 ```
 
-+------------+
 |current_date|
-+------------+
+|------------|
 |  2025-12-16|
-+------------+
 
 ## date_format()
 The below example uses date_format() to parses the date and converts from yyyy-dd-mm to MM-dd-yyyy format.
@@ -189,13 +174,11 @@ df.select(col("input"),
   ).show()
 ```
 
-+----------+-----------+
 |     input|date_format|
-+----------+-----------+
+|----------|-----------|
 |2020-02-01| 02-01-2020|
 |2019-03-01| 03-01-2019|
 |2021-03-01| 03-01-2021|
-+----------+-----------+
 
 ## to_date()
 Below example converts string in date format yyyy-MM-dd to a DateType yyyy-MM-dd using to_date(). You can also use this to convert into any specific format. PySpark supports all patterns supports on Java
