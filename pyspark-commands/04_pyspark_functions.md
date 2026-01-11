@@ -208,7 +208,7 @@ df.withColumn("hair",df.properties["hair"]) \
   .show()
 ```
 
-## explode
+## explode()
 ```python
 from pyspark.sql.functions import explode
 df.select(df.name,explode(df.properties)).show()
