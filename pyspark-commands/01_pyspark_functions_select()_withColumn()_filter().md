@@ -248,6 +248,3 @@ If your DataFrame consists of nested struct columns, you can use any of the abov
 df.filter(df.name.lastname == "Williams") \
     .show(truncate=False) 
 ```
-
-
-
