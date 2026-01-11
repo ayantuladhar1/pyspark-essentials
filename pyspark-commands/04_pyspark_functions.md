@@ -132,7 +132,7 @@ from pyspark.sql.functions import explode
 df.select(df.name,explode(df.languagesAtSchool)).show()
 ```
 
-# Split()
+## Split()
 split() sql function returns an array type after splitting the string column by delimiter. 
 ```python
 from pyspark.sql.functions import split
