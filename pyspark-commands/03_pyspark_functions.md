@@ -38,7 +38,7 @@ df2.show(truncate=False)
 ```
 
 ## Merge two or more DataFrames using union
-* DataFrame union() method merges two DataFrames and returns the new DataFrame with all rows from two Dataframes regardless of duplicate data.
+DataFrame union() method merges two DataFrames and returns the new DataFrame with all rows from two Dataframes regardless of duplicate data.
 ```python
 unionDF = df.union(df2)
 unionDF.show(truncate=False)
