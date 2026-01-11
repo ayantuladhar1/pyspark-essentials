@@ -36,6 +36,7 @@ df.withColumn("row_number",row_number().over(windowSpec)) \
 
 +-------------+----------+------+----------+
 |employee_name|department|salary|row_number|
+|-------------|----------|------|----------|
 +-------------+----------+------+----------+
 |Maria        |Finance   |3000  |1         |
 |Scott        |Finance   |3300  |2         |
