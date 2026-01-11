@@ -194,13 +194,11 @@ df.select(col("input"),
   ).show()
 ```
 
-+----------+-------+
 |     input|to_date|
-+----------+-------+
+|----------|-------|
 |2020-02-01|   null|
 |2019-03-01|   null|
 |2021-03-01|   null|
-+----------+-------+
 
 ## datediff()
 The below example returns the difference between two dates using datediff().
@@ -211,13 +209,11 @@ df.select(col("input"),
   ).show()
 ```
 
-+----------+----------+
 |     input|   to_date|
-+----------+----------+
+|----------|----------|
 |2020-02-01|2020-02-01|
 |2019-03-01|2019-03-01|
 |2021-03-01|2021-03-01|
-+----------+----------+
 
 ## months_between()
 The below example returns the months between two dates using months_between().
