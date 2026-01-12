@@ -5,14 +5,11 @@ In addition to given metadata, transformed data should have a column named as Av
 Column name carr is a mis-spelled column name and you are supposed to correct this to car
 
 ## Data
-<div style="border: 2px solid #ccc; padding: 15px; background-color: #f9f9f9; border-radius: 5px;">
-  ### This is a Box
-  This text is inside the box. You can put other Markdown formatting here, like **bold text** or *italic text*.
-</div>
+```csv
 Ford Torino, 140, 3449, US
 Chevrolet Monte Carlo, 150, 3761, US
 BMW 2002, 113, 2234, Europe
-
+```
 
 ## Metadata- columns
 
