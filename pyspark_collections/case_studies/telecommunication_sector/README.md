@@ -2,28 +2,35 @@
 This document presents business use cases for PySpark in the telecommunication sector using HDFS as the source and Hive as the target. We will explore data cleaning techniques such as removing duplicates, handling null values, and applying other popular data cleansing methods. The sample data involves multiple entities, and we will transform this data into multiple tables in Hive using PySpark code.
 ## Business Use Cases
 * Call Detail Records (CDR) Analysis
-**Description**: Analyzing call detail records to identify patterns in call durations, dropped calls, and network issues. This involves handling inconsistencies, missing values, and removing duplicate records for accurate analysis.
-1.2 Customer Usage Data Integration
-**Description**: Integrating customer usage data from various sources to create a unified and consistent dataset. This includes handling missing values, removing duplicates, standardizing data formats, and ensuring data completeness.
-2. Sample Data
-2.1 Call Detail Records (CDR) Data (HDFS Source)
-**Columns**: call_id, customer_id, call_start_time, call_end_time, call_duration, call_type, network_type, call_status
-**Sample Records**:
+  * **Description**: Analyzing call detail records to identify patterns in call durations, dropped calls, and network issues. This involves handling inconsistencies, missing values, and removing duplicate records for accurate analysis.
+* Customer Usage Data Integration
+  * **Description**: Integrating customer usage data from various sources to create a unified and consistent dataset. This includes handling missing values, removing duplicates, standardizing data formats, and ensuring data completeness.
+
+## Sample Data
+* Call Detail Records (CDR) Data (HDFS Source)
+  * **Columns**: call_id, customer_id, call_start_time, call_end_time, call_duration, call_type, network_type, call_status
+  * **Sample Records**:
+```csv
 101, 1001, 2024-09-01 10:00:00, 2024-09-01 10:05:00, 300, outgoing, 4G, completed
 102, 1002, 2024-09-01 11:00:00, 2024-09-01 11:10:00, 600, incoming, 4G, completed
 103, 1002, 2024-09-01 11:00:00, 2024-09-01 11:10:00, 600, incoming, 4G, completed
 104, 1003, 2024-09-01 12:00:00, NULL, NULL, outgoing, 3G, dropped
-2.2 Customer Usage Data (HDFS Source)
-**Columns**: usage_id, customer_id, data_used_gb, voice_minutes_used, sms_used, billing_cycle_start, billing_cycle_end, total_charges
-**Sample Records**:
+```
+
+* Customer Usage Data (HDFS Source)
+  * **Columns**: usage_id, customer_id, data_used_gb, voice_minutes_used, sms_used, billing_cycle_start, billing_cycle_end, total_charges
+  * **Sample Records**:
+```csv
 201, 1001, 5.2, 150, 20, 2024-08-01, 2024-08-31, 50.00
 202, 1002, 3.5, 200, 50, 2024-08-01, 2024-08-31, 40.00
 203, 1002, 3.5, 200, 50, 2024-08-01, 2024-08-31, 40.00
 204, 1003, NULL, NULL, 0, 2024-08-01, 2024-08-31, 30.00
-3. Data Cleaning and Transformation
-3.1 PySpark Code for Data Cleaning
-The following PySpark code demonstrates how to read data from HDFS, remove duplicates, handle null values, standardize data formats, and write the cleaned data to Hive tables.
+```
 
+## Data Cleaning and Transformation
+* PySpark Code for Data Cleaning
+The following PySpark code demonstrates how to read data from HDFS, remove duplicates, handle null values, standardize data formats, and write the cleaned data to Hive tables.
+```python
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, lit, when, trim, lower
 
@@ -51,11 +58,11 @@ usage_df = usage_df.withColumn("total_charges", when(col("total_charges").isNull
 # Write Cleaned Data to Hive Tables
 cdr_df.write.mode("overwrite").saveAsTable("telecom_db.cleaned_cdr_data")
 usage_df.write.mode("overwrite").saveAsTable("telecom_db.cleaned_usage_data")
+```
 
-
-4. Data Completeness and Consistency Checks
+## Data Completeness and Consistency Checks
 After writing the cleaned data to Hive, it's essential to verify data completeness and consistency. This involves checking that all records from the source were correctly ingested into the target tables and that there are no discrepancies. The following PySpark code demonstrates how to perform these checks.
-
+```python
 # Check Record Counts Between Source and Target
 source_cdr_count = cdr_df.count()
 target_cdr_count = spark.sql("SELECT COUNT(*) FROM telecom_db.cleaned_cdr_data").collect()[0][0]
@@ -72,7 +79,7 @@ if source_usage_count == target_usage_count:
     print("Customer usage data is complete and consistent.")
 else:
     print("Data inconsistency detected in customer usage records.")
+```
 
-
-5. Conclusion
+# Conclusion
 The above PySpark code demonstrates how to clean telecommunication data, handle duplicates and null values, standardize formats, and ensure data completeness and consistency when transforming data from HDFS to Hive. These practices are essential for maintaining accurate and reliable data in the telecommunication sector, where data quality is critical for decision-making and analysis.
