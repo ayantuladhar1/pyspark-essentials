@@ -17,8 +17,3 @@ carr - String
 horsepower - Integer
 weight - Integer
 origin - String
-```html
-<div style="border: 1px solid black; padding: 10px; width: 100px; height: 100px;">
-    Box Content
-</div>
-```
