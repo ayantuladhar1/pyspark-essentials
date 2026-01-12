@@ -12,9 +12,8 @@ BMW 2002, 113, 2234, Europe
 ```
 
 ## Metadata- columns
-{
-carr - String
-horsepower - Integer
-weight - Integer
-origin - String
-:}
+
+carr - String  
+horsepower - Integer  
+weight - Integer  
+origin - String  
