@@ -67,7 +67,7 @@ df_filled = df.na.fill({"price": average_price})
 df_filled.show()
 ```
 
-<img width="863" height="471" alt="image" src="https://github.com/user-attachments/assets/3b1dae76-0fa0-4e27-b120-6446bb47ced2" />
+<img width="858" height="266" alt="image" src="https://github.com/user-attachments/assets/2f7b8b75-e821-4761-80f0-034ea8706e56" />
 
 ## Step 4: Dropping Duplicates
 ```python
