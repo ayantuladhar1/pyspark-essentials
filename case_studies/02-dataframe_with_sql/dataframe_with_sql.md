@@ -29,8 +29,8 @@ The solution enables fast, scalable analysis of:
 |Ad-hoc analytics & reporting|	Spark SQL	|Familiar SQL interface with optimizer|
 |Reliability at scale|	Spark DAG & Lineage|	Automatic fault recovery|
 
-Step 1: Loading the Data into a DataFrame
-
+## Step 1: Loading the Data into a DataFrame
+```python
 from pyspark.sql import SparkSession
 # Initialize SparkSession
 spark = SparkSession.builder.appName("E-Commerce Analysis").getOrCreate()
@@ -46,54 +46,46 @@ columns = ["transaction_id", "customer_id", "product_id", "product_name", "categ
 # Create DataFrame
 df = spark.createDataFrame(data, columns)
 df.show()
+```
 
-
-
-
-Step 2: Using Filter Transformation
-
+## Step 2: Using Filter Transformation
+```python
 # Filter transactions where quantity is greater than 1
 df_filtered = df.filter(df.quantity > 1)
 df_filtered.show()
+```
 
-
-
-
-Step 3: Handling Null Values
-
+## Step 3: Handling Null Values
+```python
 # Filling null values in price column with the average price
 average_price = df.selectExpr("avg(price)").collect()[0][0]
 df_filled = df.na.fill({"price": average_price})
 df_filled.show()
+```
 
-
-
-Step 4: Dropping Duplicates
-
+## Step 4: Dropping Duplicates
+```python
 # Drop duplicate rows based on customer_id and product_id
 df_no_duplicates = df.dropDuplicates(["customer_id", "product_id"])
 df_no_duplicates.show()
+```
 
-
-
-Step 5: Selecting Specific Columns
-
+## Step 5: Selecting Specific Columns
+```python
 # Select specific columns
 df_selected = df.select("customer_id", "product_name", "price")
 df_selected.show()
+```
 
-
-
-Step 6: Grouping and Aggregating Data
-
+## Step 6: Grouping and Aggregating Data
+```python
 # Calculate the total spending per customer
 df_grouped = df.groupBy("customer_id").agg({"price": "sum"})
 df_grouped.show()
+```
 
-
-
-Step 7: Joining DataFrames
-
+## Step 7: Joining DataFrames
+```python
 # Assume we have another DataFrame with customer details
 customer_data = [
     (101, "John Doe", "john@example.com"),
@@ -106,11 +98,10 @@ df_customers = spark.createDataFrame(customer_data, customer_columns)
 # Join on customer_id
 df_joined = df.join(df_customers, on="customer_id", how="inner")
 df_joined.show()
+```
 
-
-
-Step 8: Union of Two DataFrames
-
+## Step 8: Union of Two DataFrames
+```python
 # Create another DataFrame with similar schema
 new_data = [
     (6, 104, 5006, 'Table', 'Furniture', 200.0, 1)
@@ -120,15 +111,24 @@ df_new = spark.createDataFrame(new_data, columns)
 # Union the DataFrames
 df_union = df.union(df_new)
 df_union.show()
+```
 
-
-Step 9: Creating Temporary Views and Using SQL
-
+## Step 9: Creating Temporary Views and Using SQL
+```python
 # Create a temporary view
 df.createOrReplaceTempView("transactions")
 
 # Run SQL query
 sql_result = spark.sql("SELECT customer_id, SUM(price * quantity) as total_spent FROM transactions GROUP BY customer_id")
 sql_result.show()
+```
+## Why DataFrames + SQL Over Raw RDDs
+* Less code, more readability
+* Automatic query optimization
+* Better performance through Catalyst
+* Native SQL support for analysts
+* Easier debugging and maintenance
+This makes the solution ideal for production-grade analytics pipelines and enterprise data platforms.
 
-<img width="1069" height="6028" alt="image" src="https://github.com/user-attachments/assets/21a8346d-ebc6-4d35-b715-8a564bdf24d5" />
+## Final Outcome
+By combining PySpark DataFrames with Spark SQL, the organization gains a scalable, fault-tolerant, and high-performance analytics solution that transforms raw transaction data into actionable business intelligence—without sacrificing reliability or speed as data volume grows.
