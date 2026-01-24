@@ -31,8 +31,8 @@ The solution enables efficient analysis of:
 |Ad-hoc analysis & reporting	|Spark SQL|	Declarative SQL with optimizer support|
 |Reliability at scale	|Spark DAG & Lineage|	Automatic fault recovery|
 
-Code to Create DataFrame
-
+## Code to Create DataFrame
+```python
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, avg
 # Initialize Spark session
@@ -52,69 +52,82 @@ data = [
 columns = ["user_id", "movie_id", "rating", "timestamp"]
 df = spark.createDataFrame(data, schema=columns)
 df.show()
+```
 
+<img width="1123" height="349" alt="image" src="https://github.com/user-attachments/assets/9a6b4e31-443a-48cd-895b-d820b1665bf1" />
 
-Step 1: Filter
-
-Find all ratings that are greater than or equal to 4.
+## Step 1: Filter
+```python
+#Find all ratings that are greater than or equal to 4.
 df_filtered = df.filter(df.rating >= 4)
 df_filtered.show()
+```
 
+<img width="1126" height="245" alt="image" src="https://github.com/user-attachments/assets/1923898a-8c39-4fe7-b1c9-17f25ef54892" />
 
-Step 2: Handle Null Values
-
-Replace null values in the 'rating' column with the average rating.
+## Step 2: Handle Null Values
+```python
+#Replace null values in the 'rating' column with the average rating.
 average_rating = df.selectExpr('avg(rating)').collect()[0][0]
 df_filled = df.na.fill({'rating': average_rating})
 df_filled.show()
+```
 
+<img width="1131" height="345" alt="image" src="https://github.com/user-attachments/assets/399f0c0d-c711-4c8d-8aec-efe6cfe6d4a6" />
 
-Step 3: Drop Duplicates
-
-Remove duplicate ratings by 'user_id' and 'movie_id'.
+## Step 3: Drop Duplicates
+```python
+#Remove duplicate ratings by 'user_id' and 'movie_id'.
 df_no_duplicates = df.dropDuplicates(['user_id', 'movie_id'])
 df_no_duplicates.show()
+```
 
+<img width="1129" height="338" alt="image" src="https://github.com/user-attachments/assets/0b8e484f-5754-45d8-b2b8-564530f6c26e" />
 
-Step 4: Select Specific Columns
-
-Select 'user_id' and 'rating' columns.
+## Step 4: Select Specific Columns
+```python
+#Select 'user_id' and 'rating' columns.
 df_selected = df.select('user_id', 'rating')
 df_selected.show()
+```
 
+<img width="1138" height="348" alt="image" src="https://github.com/user-attachments/assets/7438f587-335c-40d8-85ba-9176e7b3be0c" />
 
-Step 5: Grouping and Aggregating
-
-Calculate the average rating per movie.
+## Step 5: Grouping and Aggregating
+```python
+#Calculate the average rating per movie.
 df_grouped = df.groupBy('movie_id').agg({'rating': 'avg'})
 df_grouped.show()
+```
 
+<img width="1127" height="229" alt="image" src="https://github.com/user-attachments/assets/3adc9660-5d3c-4153-b6b4-c229adbd8321" />
 
-Step 6: Joining DataFrames
-
-Join the 'movie_ratings' DataFrame with a 'movie_details' DataFrame that contains 'movie_id' and 'movie_name'.
-# Assuming df_movies is another DataFrame that contains movie details
+## Step 6: Joining DataFrames
+```python
+#Join the 'movie_ratings' DataFrame with a 'movie_details' DataFrame that contains 'movie_id' and 'movie_name'.
+#Assuming df_movies is another DataFrame that contains movie details
 df_joined = df.join(df_movies, on='movie_id', how='inner')
 df_joined.show()
+```
 
+<img width="813" height="1128" alt="image" src="https://github.com/user-attachments/assets/0fe22ea8-a0b3-4a52-b3da-4bc935cd589d" />
 
-
-
-
-Step 7: Union of DataFrames
-
-Union this DataFrame with another 'df_new_ratings' containing additional ratings data.
+## Step 7: Union of DataFrames
+```python
+#Union this DataFrame with another 'df_new_ratings' containing additional ratings data.
 df_union = df.union(df_new_ratings)
 df_union.show()
+```
 
+<img width="648" height="204" alt="image" src="https://github.com/user-attachments/assets/74adeb32-0bd4-4b7d-87f2-fc7f1560b882" />
 
+<img width="906" height="384" alt="image" src="https://github.com/user-attachments/assets/ecc41cbc-b33c-4bb5-85a1-58cd6d29c6c6" />
 
-
-Step 8: Temporary View and SQL
-
+## Step 8: Temporary View and SQL
+```python
 Create a temp view and find the top-rated movies.
 df.createOrReplaceTempView('ratings')
 sql_result = spark.sql('SELECT movie_id, AVG(rating) as avg_rating FROM ratings GROUP BY movie_id ORDER BY avg_rating DESC LIMIT 10')
 sql_result.show()
-
-<img width="1173" height="7671" alt="image" src="https://github.com/user-attachments/assets/c966b9b7-b47a-4f2f-99c6-53928da544ac" />
+```
+<img width="1128" height="228" alt="image" src="https://github.com/user-attachments/assets/6f9dc98d-0aa9-482b-8361-e8631a2e4ad8" />
