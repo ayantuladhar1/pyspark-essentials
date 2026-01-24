@@ -48,12 +48,16 @@ df = spark.createDataFrame(data, columns)
 df.show()
 ```
 
+<img width="867" height="384" alt="image" src="https://github.com/user-attachments/assets/2790f3b6-8fc7-49db-940c-6c0876185de0" />
+
 ## Step 2: Using Filter Transformation
 ```python
 # Filter transactions where quantity is greater than 1
 df_filtered = df.filter(df.quantity > 1)
 df_filtered.show()
 ```
+
+<img width="856" height="200" alt="image" src="https://github.com/user-attachments/assets/d6d6d870-0672-47ea-bc06-33077a8f9cf0" />
 
 ## Step 3: Handling Null Values
 ```python
@@ -63,12 +67,16 @@ df_filled = df.na.fill({"price": average_price})
 df_filled.show()
 ```
 
+<img width="863" height="471" alt="image" src="https://github.com/user-attachments/assets/3b1dae76-0fa0-4e27-b120-6446bb47ced2" />
+
 ## Step 4: Dropping Duplicates
 ```python
 # Drop duplicate rows based on customer_id and product_id
 df_no_duplicates = df.dropDuplicates(["customer_id", "product_id"])
 df_no_duplicates.show()
 ```
+
+<img width="856" height="252" alt="image" src="https://github.com/user-attachments/assets/ff3c4ae0-b0e2-42e9-ad97-9d8c021cf6a1" />
 
 ## Step 5: Selecting Specific Columns
 ```python
@@ -77,12 +85,16 @@ df_selected = df.select("customer_id", "product_name", "price")
 df_selected.show()
 ```
 
+<img width="860" height="262" alt="image" src="https://github.com/user-attachments/assets/16e6b0cb-fbab-46aa-84d3-0394c028905f" />
+
 ## Step 6: Grouping and Aggregating Data
 ```python
 # Calculate the total spending per customer
 df_grouped = df.groupBy("customer_id").agg({"price": "sum"})
 df_grouped.show()
 ```
+
+<img width="857" height="214" alt="image" src="https://github.com/user-attachments/assets/e6a854a4-a425-4546-accf-ed430626ce78" />
 
 ## Step 7: Joining DataFrames
 ```python
@@ -100,6 +112,8 @@ df_joined = df.join(df_customers, on="customer_id", how="inner")
 df_joined.show()
 ```
 
+<img width="1054" height="270" alt="image" src="https://github.com/user-attachments/assets/2f22b898-019f-4c89-958f-a7352a718886" />
+
 ## Step 8: Union of Two DataFrames
 ```python
 # Create another DataFrame with similar schema
@@ -113,6 +127,8 @@ df_union = df.union(df_new)
 df_union.show()
 ```
 
+<img width="858" height="287" alt="image" src="https://github.com/user-attachments/assets/85ad5eb6-9af2-4124-a8d2-f9e38ca282a5" />
+
 ## Step 9: Creating Temporary Views and Using SQL
 ```python
 # Create a temporary view
@@ -122,6 +138,9 @@ df.createOrReplaceTempView("transactions")
 sql_result = spark.sql("SELECT customer_id, SUM(price * quantity) as total_spent FROM transactions GROUP BY customer_id")
 sql_result.show()
 ```
+
+<img width="863" height="217" alt="image" src="https://github.com/user-attachments/assets/12c9e65e-e670-4479-884c-748b279122e2" />
+
 ## Why DataFrames + SQL Over Raw RDDs
 * Less code, more readability
 * Automatic query optimization
