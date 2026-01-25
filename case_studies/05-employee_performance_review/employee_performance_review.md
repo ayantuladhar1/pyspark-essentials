@@ -143,3 +143,16 @@ df_with_cumulative_avg = df.withColumn('cumulative_avg', avg('rating').over(wind
 df_with_cumulative_avg.show()3
 ```
 <img width="1186" height="319" alt="image" src="https://github.com/user-attachments/assets/e8ed00f0-c54c-449d-acb3-2e97b69ed4e2" />
+
+## Why DataFrames + SQL + Window Functions Over Raw RDDs
+* Reduced code complexity with higher readability
+* Automatic query optimization via Catalyst
+* Superior performance through Tungsten execution
+* Native SQL support for HR analysts and reporting tools
+* Powerful time-based analytics using window functions
+* Easier debugging, testing, and long-term maintenance
+
+This approach is ideal for production-grade HR analytics pipelines and enterprise data platforms.
+
+## Final Outcome
+By combining PySpark DataFrames, Spark SQL, and Window Functions, the organization gains a scalable, fault-tolerant, and high-performance employee performance analytics solution. The pipeline transforms raw review data into actionable insights while maintaining reliability and efficiency as review volume grows over time.
