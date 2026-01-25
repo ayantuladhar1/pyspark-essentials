@@ -131,3 +131,15 @@ sql_result = spark.sql('SELECT movie_id, AVG(rating) as avg_rating FROM ratings 
 sql_result.show()
 ```
 <img width="1128" height="228" alt="image" src="https://github.com/user-attachments/assets/6f9dc98d-0aa9-482b-8361-e8631a2e4ad8" />
+
+## Why DataFrames + SQL Over Raw RDDs
+* Reduced code complexity and improved readability
+* Automatic query optimization via Catalyst
+* Better performance through Tungsten execution
+* Native SQL support for analysts and BI tools
+* Easier debugging, testing, and long-term maintenance
+
+This makes the solution well-suited for production-grade analytics pipelines and enterprise data platforms.
+
+## Final Outcome
+By combining PySpark DataFrames with Spark SQL, the organization gains a scalable, fault-tolerant, and high-performance analytics pipeline that transforms raw movie rating data into actionable insights—while maintaining reliability and performance as data volume increases.
