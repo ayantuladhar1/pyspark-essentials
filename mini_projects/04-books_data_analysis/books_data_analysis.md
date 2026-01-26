@@ -1,6 +1,5 @@
 # Problem Statement
 ## Books data analysis
-## Use Cases
 
 ## Create DF on json
 ```python
