@@ -102,6 +102,7 @@ ddf = df.withColumn("salary",col("salary").cast("Double"))
 # Update The Value of an Existing Column
 ```python
 udf = df.withColumn("salary",col("salary")*100)
+df.withColumnRenamed("amazon_product_url", "URL").show()
 ```
 
 # Create a Column from an Existing
