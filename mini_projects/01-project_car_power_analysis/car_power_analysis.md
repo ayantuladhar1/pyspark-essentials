@@ -17,6 +17,7 @@ horsepower - Integer
 weight - Integer  
 origin - String  
 
+## PySpark Solution
 ```python
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import lit, col
