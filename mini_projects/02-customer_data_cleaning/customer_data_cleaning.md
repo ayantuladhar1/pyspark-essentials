@@ -22,8 +22,9 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import lit, col
 from pyspark.sql.types import StructField, StructType, StringType, IntegerType, DoubleType
 
-#Customer Data Cleaning
+## PySpark Solution
 ```python
+#Customer Data Cleaning
 if __name__ == "__main__":
     spark = SparkSession.builder \
         .master("local[1]") \
@@ -53,5 +54,6 @@ dropDisDF = df.dropDuplicates(["Age","Height"])
 print("Distinct count of Age & Height : "+str(dropDisDF.count()))
 dropDisDF.show(truncate=False)
 ```
+## Output
 
 <img width="833" height="408" alt="image" src="https://github.com/user-attachments/assets/3eee551f-0c21-42d7-8de3-edc5b96150e0" />
